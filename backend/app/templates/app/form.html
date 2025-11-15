@@ -1,0 +1,86 @@
+{% extends 'app/base.html' %}
+
+{% block title %}Registration - Modern Web App{% endblock %}
+
+{% block content %}
+<section class="py-20 px-6">
+  <div class="container mx-auto max-w-2xl">
+    <h1 class="text-5xl font-bold text-center mb-12 fade-in">
+      Course Registration
+    </h1>
+
+    <div class="glass-card p-8 rounded-3xl">
+      <form method="post" id="registrationForm" class="space-y-6">
+        {% csrf_token %}
+
+        <div class="floating-label-group">
+          {{ form.full_name }}
+          <label for="{{ form.full_name.id_for_label }}">Full Name</label>
+        </div>
+
+        <div class="floating-label-group">
+          {{ form.email }}
+          <label for="{{ form.email.id_for_label }}">Email Address</label>
+        </div>
+
+        <div class="floating-label-group">
+          {{ form.phone }}
+          <label for="{{ form.phone.id_for_label }}">Phone Number</label>
+        </div>
+
+        <div class="floating-label-group">
+          {{ form.course }}
+          <label for="{{ form.course.id_for_label }}">Select Course</label>
+        </div>
+
+        <div class="floating-label-group">
+          {{ form.experience }}
+          <label for="{{ form.experience.id_for_label }}"
+            >Your Experience</label
+          >
+        </div>
+
+        <button type="submit" class="btn-primary w-full">
+          Submit Registration <i class="fas fa-check ml-2"></i>
+        </button>
+      </form>
+    </div>
+
+    <div class="mt-8 text-center">
+      <p class="text-gray-600">
+        Already registered?
+        <a href="{% url 'dashboard' %}" class="text-purple-600 hover:underline"
+          >View Dashboard</a
+        >
+      </p>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document
+    .getElementById("registrationForm")
+    .addEventListener("submit", function (e) {
+      const inputs = this.querySelectorAll(
+        "input[required], select[required], textarea[required]"
+      );
+      let isValid = true;
+
+      inputs.forEach((input) => {
+        if (!input.value.trim()) {
+          isValid = false;
+          input.classList.add("border-red-500");
+        } else {
+          input.classList.remove("border-red-500");
+        }
+      });
+
+      if (!isValid) {
+        e.preventDefault();
+        showToast("Please fill in all required fields", "error");
+      }
+    });
+</script>
+{% endblock %}

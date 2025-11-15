@@ -1,0 +1,56 @@
+{% extends 'app/base.html' %}
+
+{% block title %}About Us - Modern Web App{% endblock %}
+
+{% block content %}
+<section class="py-20 px-6">
+  <div class="container mx-auto max-w-4xl">
+    <h1 class="text-5xl font-bold text-center mb-12 fade-in">About Us</h1>
+
+    <div class="glass-card p-8 rounded-3xl mb-8 fade-in">
+      <h2 class="text-3xl font-bold mb-4">Our Mission</h2>
+      <p class="text-gray-600 text-lg leading-relaxed">
+        We are dedicated to creating modern, beautiful, and functional web
+        applications that empower businesses and individuals to achieve their
+        goals. Our team combines cutting-edge technology with creative design to
+        deliver exceptional digital experiences.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+      <div class="feature-card">
+        <i class="fas fa-users text-4xl text-purple-600 mb-4"></i>
+        <h3 class="text-2xl font-bold mb-3">Expert Team</h3>
+        <p class="text-gray-600">
+          Skilled professionals with years of experience
+        </p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-lightbulb text-4xl text-blue-600 mb-4"></i>
+        <h3 class="text-2xl font-bold mb-3">Innovation</h3>
+        <p class="text-gray-600">Always using the latest technologies</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-heart text-4xl text-pink-600 mb-4"></i>
+        <h3 class="text-2xl font-bold mb-3">Passion</h3>
+        <p class="text-gray-600">We love what we do and it shows</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-trophy text-4xl text-indigo-600 mb-4"></i>
+        <h3 class="text-2xl font-bold mb-3">Excellence</h3>
+        <p class="text-gray-600">Committed to delivering the best</p>
+      </div>
+    </div>
+
+    <div class="glass-card p-8 rounded-3xl text-center fade-in">
+      <h2 class="text-3xl font-bold mb-4">Join Our Journey</h2>
+      <p class="text-gray-600 text-lg mb-6">
+        Be part of something amazing. Let's build the future together.
+      </p>
+      <a href="{% url 'contact' %}" class="btn-primary">
+        Get in Touch <i class="fas fa-envelope ml-2"></i>
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

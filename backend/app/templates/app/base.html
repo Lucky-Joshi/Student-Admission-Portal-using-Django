@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Modern Web App{% endblock %}</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              poppins: ["Poppins", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    {% block extra_css %} {% endblock %}
+  </head>
+  <body
+    class="font-poppins bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 min-h-screen"
+  >
+    <!-- Navbar -->
+    <nav
+      class="navbar fixed w-full top-0 z-50 bg-white/80 backdrop-blur-md shadow-sm"
+    >
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+          <a
+            href="{% url 'index' %}"
+            class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent"
+          >
+            ModernApp
+          </a>
+
+          <div class="hidden md:flex space-x-8">
+            <a href="{% url 'index' %}" class="nav-link">Home</a>
+            <a href="{% url 'about' %}" class="nav-link">About</a>
+            <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+            <a href="{% url 'form' %}" class="nav-link">Register</a>
+            <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
+          </div>
+
+          <button
+            id="darkModeToggle"
+            class="p-2 rounded-lg hover:bg-gray-100 transition"
+          >
+            <i class="fas fa-moon text-gray-700"></i>
+          </button>
+
+          <button id="mobileMenuBtn" class="md:hidden p-2">
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden mt-4 space-y-2">
+          <a href="{% url 'index' %}" class="block py-2 hover:text-purple-600"
+            >Home</a
+          >
+          <a href="{% url 'about' %}" class="block py-2 hover:text-purple-600"
+            >About</a
+          >
+          <a href="{% url 'contact' %}" class="block py-2 hover:text-purple-600"
+            >Contact</a
+          >
+          <a href="{% url 'form' %}" class="block py-2 hover:text-purple-600"
+            >Register</a
+          >
+          <a
+            href="{% url 'dashboard' %}"
+            class="block py-2 hover:text-purple-600"
+            >Dashboard</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Messages -->
+    {% if messages %}
+    <div id="messageContainer" class="fixed top-20 right-4 z-50 space-y-2">
+      {% for message in messages %}
+      <div class="toast {{ message.tags }}">
+        <i class="fas fa-check-circle mr-2"></i>
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <main class="pt-20">{% block content %} {% endblock %}</main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-20">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-xl font-bold mb-4">ModernApp</h3>
+            <p class="text-gray-400">
+              Building the future with modern technology
+            </p>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-4">Quick Links</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li>
+                <a href="{% url 'index' %}" class="hover:text-white">Home</a>
+              </li>
+              <li>
+                <a href="{% url 'about' %}" class="hover:text-white">About</a>
+              </li>
+              <li>
+                <a href="{% url 'contact' %}" class="hover:text-white"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-4">Services</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li>Web Development</li>
+              <li>Data Science</li>
+              <li>AI Solutions</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-4">Follow Us</h4>
+            <div class="flex space-x-4">
+              <a href="#" class="social-icon"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-icon"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+              <a href="#" class="social-icon"
+                ><i class="fab fa-instagram"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400"
+        >
+          <p>&copy; 2025 ModernApp. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %} {% endblock %}
+  </body>
+</html>

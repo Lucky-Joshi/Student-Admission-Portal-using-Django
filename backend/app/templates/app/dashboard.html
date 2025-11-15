@@ -1,0 +1,110 @@
+{% extends 'app/base.html' %}
+
+{% block title %}Dashboard - Modern Web App{% endblock %}
+
+{% block content %}
+<section class="py-20 px-6">
+  <div class="container mx-auto">
+    <h1 class="text-5xl font-bold mb-12 fade-in">Dashboard</h1>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      <div class="glass-card p-6 rounded-2xl">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-600 mb-2">Total Registrations</p>
+            <h3 class="text-4xl font-bold text-purple-600">
+              {{ total_registrations }}
+            </h3>
+          </div>
+          <i class="fas fa-users text-5xl text-purple-600 opacity-20"></i>
+        </div>
+      </div>
+      <div class="glass-card p-6 rounded-2xl">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-600 mb-2">Total Contacts</p>
+            <h3 class="text-4xl font-bold text-blue-600">
+              {{ total_contacts }}
+            </h3>
+          </div>
+          <i class="fas fa-envelope text-5xl text-blue-600 opacity-20"></i>
+        </div>
+      </div>
+      <div class="glass-card p-6 rounded-2xl">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-600 mb-2">Active Courses</p>
+            <h3 class="text-4xl font-bold text-pink-600">5</h3>
+          </div>
+          <i class="fas fa-book text-5xl text-pink-600 opacity-20"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Registrations Table -->
+    <div class="glass-card p-8 rounded-3xl mb-8">
+      <h2 class="text-3xl font-bold mb-6">Recent Registrations</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr class="border-b border-gray-200">
+              <th class="text-left py-3 px-4">Name</th>
+              <th class="text-left py-3 px-4">Email</th>
+              <th class="text-left py-3 px-4">Course</th>
+              <th class="text-left py-3 px-4">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for registration in registrations %}
+            <tr class="border-b border-gray-100 hover:bg-purple-50 transition">
+              <td class="py-3 px-4">{{ registration.full_name }}</td>
+              <td class="py-3 px-4">{{ registration.email }}</td>
+              <td class="py-3 px-4">
+                <span
+                  class="px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-sm"
+                >
+                  {{ registration.get_course_display }}
+                </span>
+              </td>
+              <td class="py-3 px-4">
+                {{ registration.created_at|date:"M d, Y" }}
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="4" class="text-center py-8 text-gray-500">
+                No registrations yet
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Recent Contacts -->
+    <div class="glass-card p-8 rounded-3xl">
+      <h2 class="text-3xl font-bold mb-6">Recent Contacts</h2>
+      <div class="space-y-4">
+        {% for contact in contacts %}
+        <div class="p-4 bg-white/50 rounded-xl hover:shadow-md transition">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-bold text-lg">{{ contact.name }}</h3>
+              <p class="text-gray-600">{{ contact.email }}</p>
+              <p class="text-sm text-gray-500 mt-2">{{ contact.subject }}</p>
+            </div>
+            <span class="text-sm text-gray-500"
+              >{{ contact.created_at|date:"M d" }}</span
+            >
+          </div>
+        </div>
+        {% empty %}
+        <p class="text-center text-gray-500 py-8">No contacts yet</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
