@@ -31,7 +31,7 @@ A beautiful, modern full-stack website built with Django backend and aesthetic f
 ## 📁 Project Structure
 
 ```
-project/
+Student-Admission-Portal-using-Django/
 ├── backend/
 │   ├── manage.py
 │   ├── requirements.txt
